@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SigEp Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css')}}">
+</head>
+<body>
+    <div class="content">
+        <h1>Welcome, Brothers!</h1>
+        <p>This is your central hub for all things SigEp.</p>
+
+        <div class="dashboard-grid">
+            <div class="dashboard-box minutes-box">
+                <h2>Chapter Meeting Minutes</h2>
+                <ul>
+                    <li><a href="/files/minutes/2024-05-15_Chapter_Meeting.pdf" target="_blank">May 15, 2024 Minutes (PDF)</a></li>
+                    <li><a href="/files/minutes/2024-04-20_Chapter_Meeting.pdf" target="_blank">April 20, 2024 Minutes (PDF)</a></li>
+                    <li><a href="/files/minutes/2024-03-10_Chapter_Meeting.pdf" target="_blank">March 10, 2024 Minutes (PDF)</a></li>
+                </ul>
+            </div>
+
+            <div class="dashboard-box links-box">
+                <h2>Important Links</h2>
+                <ul>
+                    <li><a href="https://www.sigep.org/" target="_blank">SigEp National Website</a></li>
+                    <li><a href="https://calendar.google.com/calendar/embed?src=c_0tsn80ej6o3t4tfqj58kq69rgk%40group.calendar.google.com&ctz=America%2FNew_York" target="_blank">Chapter Calendar</a></li>
+                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc..." target="_blank">Service Hours Log</a></li>
+                </ul>
+            </div>
+
+            <div class="dashboard-box announcements-box">
+                <h2>Latest Announcements</h2>
+                <p><strong>June 15, 2024:</strong> Brotherhood Retreat sign-ups close this Friday!</p>
+                <p><strong>June 10, 2024:</strong> New study hours policy has been implemented. See details <a href="#">here</a>.</p>
+            </div>
+
+            <div class="dashboard-box resources-box">
+                <h2>Chapter Resources</h2>
+                <ul>
+                    <li><a href="/files/resources/Chapter_Bylaws_2024.pdf" target="_blank">Chapter Bylaws (PDF)</a></li>
+                    <li><a href="/files/resources/New_Member_Handbook.pdf" target="_blank">New Member Handbook (PDF)</a></li>
+                    <li><a href="/files/resources/Officer_Contact_List.pdf" target="_blank">Officer Contact List (PDF)</a></li>
+                </ul>
+            </div>
+
+            <div class="dashboard-box leaderboard">
+                <h2>Leaderboard</h2>
+                <p>Last updated: <span id="last-updated">Never</span></p>
+                <table id="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>Player Name</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <p class="loading-message">Loading leaderboard data...</p>
+                <p class="error-message" style="display: none; color: red;">Failed to load leaderboard data. Please try again later.</p>
+            </div>
+        </div>
+    </div>
+
+     <script src="{{ url_for('static', filename='/script.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+/* Your existing body and content styles */
+body {
+    position: relative;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/static/images/sigepFlag.png');
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px);
+    z-index: -1;
+    transform: scale(1.02);
+}
+
+.content {
+    position: relative; /* Ensure content is on top of blurred background */
+    z-index: 1;
+    /* Removed text-align: center; from here, let boxes handle their own alignment */
+    padding: 20px; /* Still good for overall padding */
+    max-width: 1200px; /* Limit content width for better readability */
+    margin: 0 auto; /* Center the content div itself */
+}
+
+
+/* New Styles for Dashboard Boxes */
+
+.dashboard-grid {
+    display: grid; /* Use CSS Grid for layout */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
+    gap: 25px; /* Space between boxes */
+    padding: 20px 0; /* Padding above/below the grid */
+}
+
+.dashboard-box {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+    border-radius: 8px; /* Rounded corners */
+    padding: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    text-align: left; /* Align text within boxes */
+    color: #333; /* Darker text for readability on light background */
+}
+
+.dashboard-box h2 {
+    color: #8B0000; /* SigEp Red for headings (or your preferred accent color) */
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ddd; /* A subtle separator */
+    padding-bottom: 10px;
+}
+
+.dashboard-box ul {
+    list-style: none; /* Remove default bullet points */
+    padding: 0;
+    margin: 0;
+}
+
+.dashboard-box ul li {
+    margin-bottom: 10px;
+}
+
+.dashboard-box ul li a {
+    text-decoration: none; /* Remove underline from links */
+    color: #0056b3; /* A standard link blue */
+    font-weight: bold;
+    transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.dashboard-box ul li a:hover {
+    color: #007bff; /* Lighter blue on hover */
+}
+
+.dashboard-box p {
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+/* Optional: Specific styles for individual boxes */
+
+.announcements-box {
+    font-style: italic;
+    font-size: 0.95em;
+}
+
+.leaderboard table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.leaderboard th,
+.leaderboard td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    color: #333; /* Ensure text is visible */
+}
+
+.leaderboard th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.leaderboard tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.leaderboard tbody tr:hover {
+    background-color: #e9e9e9;
+}
+
+.leaderboard .loading-message,
+.leaderboard .error-message {
+    text-align: center;
+    margin-top: 10px;
+}

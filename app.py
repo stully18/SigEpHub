@@ -9,7 +9,8 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-userDB = {"shane":"012420"}
+userDB = {"shane":"012420",
+          "ronan": "1234"}
 
 class User(UserMixin):
     def __init__(self, id):

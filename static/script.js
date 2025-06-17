@@ -4,7 +4,7 @@ const SPREADSHEET_ID = '12ZcH3BaGC-J_96nF-8ujTmb_2D5SXVZJt1nN5gBsLac'; // Replac
 const SHEET_NAME = 'Sperm_Points'; // Replace with your Sheet Name (e.g., "Leaderboard")
 const RANGE = 'A:B'; // *** UPDATED: Now A:B for Player Name and Points ***
 
-// --- DOM Elements ---
+// --- DOM Elements ---pu
 const leaderboardTableBody = document.querySelector('#leaderboard-table tbody');
 const lastUpdatedSpan = document.getElementById('last-updated');
 const loadingMessage = document.querySelector('.leaderboard .loading-message');

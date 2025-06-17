@@ -4,68 +4,166 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SigEp Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css')}}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif; /* Primary body font */
+            margin: 0;
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
+            /* Darker, modern background gradient with a hint of purple */
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #4a3c5a 100%); /* Deep charcoal to dark blue-gray to subtle dark purple */
+            color: #e0e7ff; /* Light, soft white text for readability */
+        }
+
+        /* Hero section specific background - now a purple gradient */
+        .hero-section {
+            background: linear-gradient(to right, #6A0DAD 0%, #800080 100%); /* Deep purple gradient */
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle wave/fade at the bottom of the hero to blend with content */
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px; /* Adjust height as needed */
+            background: linear-gradient(to bottom, transparent, rgba(44, 62, 80, 0.5)); /* Fades to body background color */
+            z-index: 1;
+        }
+
+        /* Custom scrollbar for dark theme with SigEp colors */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #4a6a8a; /* Darker track */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #DC2626; /* Bright SigEp Red for thumb */
+            border-radius: 10px;
+            border: 2px solid #2c3e50; /* Border to match body background */
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #EF4444; /* Lighter red on hover */
+        }
+    </style>
 </head>
-<body>
-    <div class="content">
-        <h1>Welcomeeee, Brothers!</h1>
-        <p>This is your central hub for all things SigEp.</p>
+<body class="min-h-screen flex flex-col">
+    <nav class="bg-gray-800 bg-opacity-95 shadow-xl p-5 flex justify-between items-center relative z-20 text-white">
+        <h1 class="text-3xl font-extrabold font-['Montserrat']">SigEp Dashboard</h1>
+        <div class="flex items-center space-x-4">
+            <span class="text-lg font-medium text-gray-200">Welcome, <span class="font-bold capitalize text-red-300">{{ username }}</span>!</span>
+            <a href="{{ url_for('logout') }}" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-5 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                Logout
+            </a>
+        </div>
+    </nav>
 
-        <div class="dashboard-grid">
-            <div class="dashboard-box minutes-box">
-                <h2>Chapter Meeting Minutes</h2>
-                <ul>
-                    <li><a href="/files/minutes/2024-05-15_Chapter_Meeting.pdf" target="_blank">May 15, 2024 Minutes (PDF)</a></li>
-                    <li><a href="/files/minutes/2024-04-20_Chapter_Meeting.pdf" target="_blank">April 20, 2024 Minutes (PDF)</a></li>
-                    <li><a href="/files/minutes/2024-03-10_Chapter_Meeting.pdf" target="_blank">March 10, 2024 Minutes (PDF)</a></li>
-                </ul>
-            </div>
-
-            <div class="dashboard-box links-box">
-                <h2>Important Links</h2>
-                <ul>
-                    <li><a href="https://calendar.google.com/calendar/embed?src=c_0tsn80ej6o3t4tfqj58kq69rgk%40group.calendar.google.com&ctz=America%2FNew_York" target="_blank">Chapter Calendar</a></li>
-                    <li><a href="https://docs.google.com/forms/d/1D-qH8SHIV2e0ayf6f84e77lyVMVYE-53EFuuZLftgsE/viewform?edit_requested=true" target="_blank">Service Hours Log</a></li>
-                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSd_zUhesyRJjb_KzRWl_Fjj3DujE7vzuIp35--boEEv-9R7kQ/viewform" target="_blank">Sunshine Inbox</a></li>
-                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSd287wKP4vz-cNOe9l5v6KEn7-YwswPdKGqkRdgFvL6E6ULzw/viewform" target="_blank">Darkness Inbox</a></li>
-                </ul>
-            </div>
-
-            <div class="dashboard-box announcements-box">
-                <h2>Latest Announcements</h2>
-                <p><strong>June 15, 2024:</strong> Brotherhood Retreat sign-ups close this Friday!</p>
-                <p><strong>June 10, 2024:</strong> New study hours policy has been implemented. See details <a href="#">here</a>.</p>
-            </div>
-
-            <div class="dashboard-box resources-box">
-                <h2>Chapter Resources</h2>
-                <ul>
-                    <li><a href="/files/resources/Chapter_Bylaws_2024.pdf" target="_blank">Chapter Bylaws (PDF)</a></li>
-                    <li><a href="/files/resources/New_Member_Handbook.pdf" target="_blank">New Member Handbook (PDF)</a></li>
-                    <li><a href="/files/resources/Officer_Contact_List.pdf" target="_blank">Officer Contact List (PDF)</a></li>
-                </ul>
-            </div>
-
-            <div class="dashboard-box leaderboard">
-                <h2>Leaderboard</h2>
-                <p>Last updated: <span id="last-updated">Never</span></p>
-                <table id="leaderboard-table">
-                    <thead>
-                        <tr>
-                            <th>Player Name</th>
-                            <th>Points</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <p class="loading-message">Loading leaderboard data...</p>
-                <p class="error-message" style="display: none; color: red;">Failed to load leaderboard data. Please try again later.</p>
-            </div>
+    <div class="hero-section text-white p-10 md:p-12 lg:p-16 shadow-inner relative z-10">
+        <div class="container mx-auto">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-4 font-['Montserrat'] leading-tight">Welcome, Brothers!</h2>
+            <p class="text-xl md:text-2xl font-light opacity-90">This is your central hub for all things SigEp. Stay connected and informed!</p>
         </div>
     </div>
 
-     <script src="{{ url_for('static', filename='/script.js') }}"></script>
+    <div class="flex-grow container mx-auto p-6 md:p-8 relative z-10 -mt-10 md:-mt-16">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mb-6 rounded-lg overflow-hidden shadow-xl">
+                    {% for category, message in messages %}
+                        <div class="p-4 text-sm 
+                            {% if category == 'success' %}bg-green-600 text-white{% elif category == 'danger' %}bg-red-600 text-white{% else %}bg-blue-600 text-white{% endif %}" 
+                            role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
 
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div class="bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-purple-700">
+                <h3 class="text-2xl font-bold mb-4 text-purple-400 border-b-2 border-purple-600 pb-3 font-['Montserrat']">Chapter Meeting Minutes</h3>
+                <ul class="list-disc pl-5 space-y-3 text-gray-200">
+                    <li><a href="/files/minutes/2024-05-15_Chapter_Meeting.pdf" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">May 15, 2024 Minutes (PDF)</a></li>
+                    <li><a href="/files/minutes/2024-04-20_Chapter_Meeting.pdf" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">April 20, 2024 Minutes (PDF)</a></li>
+                    <li><a href="/files/minutes/2024-03-10_Chapter_Meeting.pdf" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">March 10, 2024 Minutes (PDF)</a></li>
+                </ul>
+            </div>
+
+            <div class="bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-purple-700">
+                <h3 class="text-2xl font-bold mb-4 text-purple-400 border-b-2 border-purple-600 pb-3 font-['Montserrat']">Important Links</h3>
+                <ul class="list-disc pl-5 space-y-3 text-gray-200">
+                    <li><a href="https://calendar.google.com/calendar/embed?src=c_0tsn80ej6o3t4tfqj58kq69rgk%40group.calendar.google.com&ctz=America%2FNew_York" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">Chapter Calendar</a></li>
+                    <li><a href="https://docs.google.com/forms/d/1D-qH8SHIV2e0ayf6f84e77lyVMVYE-53EFuuZLftgsE/viewform?edit_requested=true" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">Service Hours Log</a></li>
+                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSd_zUhesyRJjb_KzRWl_Fjj3DujE7vzuIp35--boEEv-9R7kQ/viewform" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">Sunshine Inbox</a></li>
+                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSd287wKP4vz-cNOe9l5v6KEn7-YwswPdKGqkRdgFvL6E6ULzw/viewform" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">Darkness Inbox</a></li>
+                </ul>
+            </div>
+
+            <div class="bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-purple-700">
+                <h3 class="text-2xl font-bold mb-4 text-purple-400 border-b-2 border-purple-600 pb-3 font-['Montserrat']">Latest Announcements</h3>
+                <p class="mb-3 italic text-gray-300 leading-relaxed">
+                    <strong class="font-semibold text-red-200">June 15, 2024:</strong> Brotherhood Retreat sign-ups close this Friday! Don't miss out.
+                </p>
+                <p class="italic text-gray-300 leading-relaxed">
+                    <strong class="font-semibold text-red-200">June 10, 2024:</strong> New study hours policy has been implemented. See full details <a href="#" class="text-blue-400 hover:text-blue-300 font-medium">here</a>.
+                </p>
+            </div>
+
+            <div class="bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-purple-700">
+                <h3 class="text-2xl font-bold mb-4 text-purple-400 border-b-2 border-purple-600 pb-3 font-['Montserrat']">Chapter Resources</h3>
+                <ul class="list-disc pl-5 space-y-3 text-gray-200">
+                    <li><a href="/files/resources/Chapter_Bylaws_2024.pdf" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">Chapter Bylaws (PDF)</a></li>
+                    <li><a href="/files/resources/New_Member_Handbook.pdf" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">New Member Handbook (PDF)</a></li>
+                    <li><a href="/files/resources/Officer_Contact_List.pdf" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">Officer Contact List (PDF)</a></li>
+                </ul>
+            </div>
+            
+            <div class="bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-purple-700 md:col-span-2 lg:col-span-2 xl:col-span-2">
+                <h3 class="text-2xl font-bold mb-4 text-purple-400 border-b-2 border-purple-600 pb-3 font-['Montserrat']">Leaderboard</h3>
+                <p class="text-sm text-gray-400 mb-4">Last updated: <span id="last-updated" class="font-semibold">Never</span></p>
+                <div class="overflow-x-auto border border-purple-700 rounded-md">
+                    <table id="leaderboard-table" class="min-w-full divide-y divide-gray-600">
+                        <thead class="bg-gray-800">
+                            <tr>
+                                <th class="py-3 px-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Player Name</th>
+                                <th class="py-3 px-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Points</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-700 divide-y divide-gray-600">
+                            <tr>
+                                <td class="py-3 px-4 whitespace-nowrap text-gray-200">Brother Alpha</td>
+                                <td class="py-3 px-4 whitespace-nowrap text-gray-200">1500</td>
+                            </tr>
+                            <tr class="bg-gray-700">
+                                <td class="py-3 px-4 whitespace-nowrap text-gray-200">Brother Beta</td>
+                                <td class="py-3 px-4 whitespace-nowrap text-gray-200">1250</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 whitespace-nowrap text-gray-200">Brother Gamma</td>
+                                <td class="py-3 px-4 whitespace-nowrap text-gray-200">1100</td>
+                            </tr>
+                             <tr>
+                                <td class="py-3 px-4 whitespace-nowrap text-gray-200">Brother Delta</td>
+                                <td class="py-3 px-4 whitespace-nowrap text-gray-200">900</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="loading-message text-center text-gray-400 mt-4 hidden">Loading leaderboard data...</p>
+                <p class="error-message text-center text-red-400 mt-4 hidden">Failed to load leaderboard data. Please try again later.</p>
+            </div>
+            
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

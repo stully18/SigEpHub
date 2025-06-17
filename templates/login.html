@@ -11,26 +11,23 @@
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
-            overflow: hidden; /* Prevent scrollbar if image is slightly larger */
+            overflow: hidden;
         }
-        /* Login background with purple tint */
         .login-bg {
-            background-image: url('{{ url_for("static", filename="images/sigepFlag.png") }}'); /* Your original background image */
+            background-image: url('{{ url_for("static", filename="images/sigepFlag.png") }}');
             background-size: cover;
             background-position: center;
-            filter: blur(5px) grayscale(50%); /* Added grayscale for moodier look */
+            filter: blur(5px) grayscale(50%);
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Send it to the back */
-            transform: scale(1.02); /* Slight scale to hide blur edges */
-            /* Overlay a subtle purple tint */
-            background-color: rgba(106, 13, 173, 0.2); /* SigEp Purple with transparency */
-            background-blend-mode: multiply; /* Blends the color with the image */
+            z-index: -1;
+            transform: scale(1.02);
+            background-color: rgba(106, 13, 173, 0.2);
+            background-blend-mode: multiply;
         }
-        /* Ensure content is centered and above the background */
         .login-container {
             position: relative;
             z-index: 1;

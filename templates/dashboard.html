@@ -8,49 +8,42 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif; /* Primary body font */
+            font-family: 'Inter', sans-serif;
             margin: 0;
-            overflow-x: hidden; /* Prevent horizontal scrollbar */
-            /* Darker, modern background gradient with a hint of purple */
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #4a3c5a 100%); /* Deep charcoal to dark blue-gray to subtle dark purple */
-            color: #e0e7ff; /* Light, soft white text for readability */
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #4a3c5a 100%);
+            color: #e0e7ff;
         }
-
-        /* Hero section specific background - now a purple gradient */
         .hero-section {
-            background: linear-gradient(to right, #6A0DAD 0%, #800080 100%); /* Deep purple gradient */
+            background: linear-gradient(to right, #6A0DAD 0%, #800080 100%);
             position: relative;
             overflow: hidden;
         }
-
-        /* Subtle wave/fade at the bottom of the hero to blend with content */
         .hero-section::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 50px; /* Adjust height as needed */
-            background: linear-gradient(to bottom, transparent, rgba(44, 62, 80, 0.5)); /* Fades to body background color */
+            height: 50px;
+            background: linear-gradient(to bottom, transparent, rgba(44, 62, 80, 0.5));
             z-index: 1;
         }
-
-        /* Custom scrollbar for dark theme with SigEp colors */
         ::-webkit-scrollbar {
             width: 10px;
             height: 10px;
         }
         ::-webkit-scrollbar-track {
-            background: #4a6a8a; /* Darker track */
+            background: #4a6a8a;
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb {
-            background: #DC2626; /* Bright SigEp Red for thumb */
+            background: #DC2626;
             border-radius: 10px;
-            border: 2px solid #2c3e50; /* Border to match body background */
+            border: 2px solid #2c3e50;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #EF4444; /* Lighter red on hover */
+            background: #EF4444;
         }
     </style>
 </head>
@@ -77,8 +70,8 @@
             {% if messages %}
                 <div class="mb-6 rounded-lg overflow-hidden shadow-xl">
                     {% for category, message in messages %}
-                        <div class="p-4 text-sm 
-                            {% if category == 'success' %}bg-green-600 text-white{% elif category == 'danger' %}bg-red-600 text-white{% else %}bg-blue-600 text-white{% endif %}" 
+                        <div class="p-4 text-sm
+                            {% if category == 'success' %}bg-green-600 text-white{% elif category == 'danger' %}bg-red-600 text-white{% else %}bg-blue-600 text-white{% endif %}"
                             role="alert">
                             {{ message }}
                         </div>
@@ -125,45 +118,43 @@
                     <li><a href="/files/resources/Officer_Contact_List.pdf" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">Officer Contact List (PDF)</a></li>
                 </ul>
             </div>
-            
+
             <div class="bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-purple-700 md:col-span-2 lg:col-span-2 xl:col-span-2">
-                <h3 class="text-2xl font-bold mb-4 text-purple-400 border-b-2 border-purple-600 pb-3 font-['Montserrat']">Leaderboard</h3>
-                <p class="text-sm text-gray-400 mb-4">Last updated: <span id="last-updated" class="font-semibold">Never</span></p>
+                <h3 class="text-2xl font-bold mb-4 text-purple-400 border-b-2 border-purple-600 pb-3 font-['Montserrat']">Service Hour Leaderboard</h3>
+
+                <p class="text-sm text-gray-400 mb-4">Displaying data from service_hours.csv.</p>
+
                 <div class="overflow-x-auto border border-purple-700 rounded-md">
                     <table id="leaderboard-table" class="min-w-full divide-y divide-gray-600">
                         <thead class="bg-gray-800">
                             <tr>
-                                <th class="py-3 px-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Player Name</th>
-                                <th class="py-3 px-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Points</th>
+                                <th class="py-3 px-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Rank</th>
+                                <th class="py-3 px-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Brother Name</th>
+                                <th class="py-3 px-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Hours</th>
                             </tr>
                         </thead>
                         <tbody class="bg-gray-700 divide-y divide-gray-600">
-                            <tr>
-                                <td class="py-3 px-4 whitespace-nowrap text-gray-200">Brother Alpha</td>
-                                <td class="py-3 px-4 whitespace-nowrap text-gray-200">1500</td>
-                            </tr>
-                            <tr class="bg-gray-700">
-                                <td class="py-3 px-4 whitespace-nowrap text-gray-200">Brother Beta</td>
-                                <td class="py-3 px-4 whitespace-nowrap text-gray-200">1250</td>
-                            </tr>
-                            <tr>
-                                <td class="py-3 px-4 whitespace-nowrap text-gray-200">Brother Gamma</td>
-                                <td class="py-3 px-4 whitespace-nowrap text-gray-200">1100</td>
-                            </tr>
-                             <tr>
-                                <td class="py-3 px-4 whitespace-nowrap text-gray-200">Brother Delta</td>
-                                <td class="py-3 px-4 whitespace-nowrap text-gray-200">900</td>
-                            </tr>
+                            {% if leaderboard %}
+                                {% for entry in leaderboard %}
+                                    <tr class="{% if loop.index == 1 %}bg-purple-800 text-white{% elif loop.index == 2 %}bg-purple-700 text-gray-100{% elif loop.index == 3 %}bg-purple-600 text-gray-200{% else %}text-gray-200{% endif %}">
+                                        <td class="py-3 px-4 whitespace-nowrap font-bold text-lg">#{{ loop.index }}</td>
+                                        <td class="py-3 px-4 whitespace-nowrap">{{ entry.name }}</td>
+                                        <td class="py-3 px-4 whitespace-nowrap">{{ entry.hours | round(1) }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="3" class="py-4 text-center text-gray-400">No leaderboard data available. Ensure 'data/service_hours.csv' exists and is correctly formatted.</td>
+                                </tr>
+                            {% endif %}
                         </tbody>
                     </table>
                 </div>
-                <p class="loading-message text-center text-gray-400 mt-4 hidden">Loading leaderboard data...</p>
-                <p class="error-message text-center text-red-400 mt-4 hidden">Failed to load leaderboard data. Please try again later.</p>
             </div>
-            
+
         </div>
     </div>
-    
+
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

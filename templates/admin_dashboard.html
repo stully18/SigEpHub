@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #4a3c5a 100%);
+            color: #e0e7ff;
+        }
+        .hero-section {
+            background: linear-gradient(to right, #6A0DAD 0%, #800080 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(to bottom, transparent, rgba(44, 62, 80, 0.5));
+            z-index: 1;
+        }
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #4a6a8a;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #DC2626;
+            border-radius: 10px;
+            border: 2px solid #2c3e50;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #EF4444;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <nav class="bg-gray-800 bg-opacity-95 shadow-xl p-5 flex justify-between items-center relative z-20 text-white">
+        <h1 class="text-3xl font-extrabold font-['Montserrat']">Admin Dashboard</h1>
+        <div class="flex items-center space-x-4">
+            <span class="text-lg font-medium text-gray-200">Welcome, <span class="font-bold capitalize text-red-300">{{ username }}</span>!</span>
+            <a href="{{ url_for('logout') }}" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-5 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                Logout
+            </a>
+        </div>
+    </nav>
+
+    <div class="hero-section text-white p-10 md:p-12 lg:p-16 shadow-inner relative z-10">
+        <div class="container mx-auto">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-4 font-['Montserrat'] leading-tight">Admin Controls</h2>
+            <p class="text-xl md:text-2xl font-light opacity-90">Manage application settings and data.</p>
+        </div>
+    </div>
+
+    <div class="flex-grow container mx-auto p-6 md:p-8 relative z-10 -mt-10 md:-mt-16">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mb-6 rounded-lg overflow-hidden shadow-xl">
+                    {% for category, message in messages %}
+                        <div class="p-4 text-sm
+                            {% if category == 'success' %}bg-green-600 text-white{% elif category == 'danger' %}bg-red-600 text-white{% else %}bg-blue-600 text-white{% endif %}"
+                            role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-purple-700">
+                <h3 class="text-2xl font-bold mb-4 text-purple-400 border-b-2 border-purple-600 pb-3 font-['Montserrat']">Upload Service Hours CSV</h3>
+                <p class="text-gray-300 mb-4">Upload a new CSV file to update the service hours leaderboard. The CSV should contain columns named 'name' and 'hours' OR 'brother' and 'service_hours'.</p>
+                <form method="POST" enctype="multipart/form-data" class="space-y-4">
+                    <div>
+                        <label for="csv_file" class="block text-sm font-medium text-gray-300 mb-1">Select CSV File:</label>
+                        <input type="file" name="file" id="csv_file" accept=".csv" required
+                               class="w-full text-gray-300
+                                      file:mr-4 file:py-2 file:px-4
+                                      file:rounded-full file:border-0
+                                      file:text-sm file:font-semibold
+                                      file:bg-purple-50 file:text-purple-700
+                                      hover:file:bg-purple-100 cursor-pointer">
+                    </div>
+                    <button type="submit"
+                            class="w-full bg-green-600 text-white font-bold py-2.5 px-4 rounded-md shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition duration-200 ease-in-out">
+                        Upload CSV
+                    </button>
+                </form>
+            </div>
+
+            <div class="bg-gray-700 p-6 rounded-xl shadow-lg border border-purple-700">
+                <h3 class="text-2xl font-bold mb-4 text-purple-400 border-b-2 border-purple-600 pb-3 font-['Montserrat']">Other Admin Tasks</h3>
+                <p class="text-gray-300 mb-4">Future administrative functionalities can be added here.</p>
+                <ul class="list-disc pl-5 space-y-3 text-gray-200">
+                    <li><a href="#" class="text-blue-400 hover:text-blue-300 font-medium">Manage Users (Coming Soon)</a></li>
+                    <li><a href="#" class="text-blue-400 hover:text-blue-300 font-medium">View Logs (Coming Soon)</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

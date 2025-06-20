@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard</title> {# Changed title #}
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -49,7 +49,7 @@
 </head>
 <body class="min-h-screen flex flex-col">
     <nav class="bg-gray-800 bg-opacity-95 shadow-xl p-5 flex justify-between items-center relative z-20 text-white">
-        <h1 class="text-3xl font-extrabold font-['Montserrat']">Admin Dashboard</h1>
+        <h1 class="text-3xl font-extrabold font-['Montserrat']">Admin Dashboard</h1> {# Changed title #}
         <div class="flex items-center space-x-4">
             <span class="text-lg font-medium text-gray-200">Welcome, <span class="font-bold capitalize text-red-300">{{ username }}</span>!</span>
             <a href="{{ url_for('logout') }}" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-5 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
@@ -60,8 +60,8 @@
 
     <div class="hero-section text-white p-10 md:p-12 lg:p-16 shadow-inner relative z-10">
         <div class="container mx-auto">
-            <h2 class="text-4xl md:text-5xl font-extrabold mb-4 font-['Montserrat'] leading-tight">Admin Controls</h2>
-            <p class="text-xl md:text-2xl font-light opacity-90">Manage application settings and data.</p>
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-4 font-['Montserrat'] leading-tight">Admin Controls</h2> {# Changed title #}
+            <p class="text-xl md:text-2xl font-light opacity-90">Manage application settings and data.</p> {# Changed subtitle #}
         </div>
     </div>
 
@@ -80,7 +80,81 @@
             {% endif %}
         {% endwith %}
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+            {# ALL CONTENT FROM DASHBOARD.HTML STARTS HERE #}
+
+            <div class="bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-purple-700">
+                <h3 class="text-2xl font-bold mb-4 text-purple-400 border-b-2 border-purple-600 pb-3 font-['Montserrat']">Chapter Meeting Minutes</h3>
+                <ul class="list-disc pl-5 space-y-3 text-gray-200">
+                    <li><a href="/files/minutes/2024-05-15_Chapter_Meeting.pdf" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">May 15, 2024 Minutes (PDF)</a></li>
+                    <li><a href="/files/minutes/2024-04-20_Chapter_Meeting.pdf" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">April 20, 2024 Minutes (PDF)</a></li>
+                    <li><a href="/files/minutes/2024-03-10_Chapter_Meeting.pdf" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">March 10, 2024 Minutes (PDF)</a></li>
+                </ul>
+            </div>
+
+            <div class="bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-purple-700">
+                <h3 class="text-2xl font-bold mb-4 text-purple-400 border-b-2 border-purple-600 pb-3 font-['Montserrat']">Important Links</h3>
+                <ul class="list-disc pl-5 space-y-3 text-gray-200">
+                    <li><a href="https://calendar.google.com/calendar/embed?src=c_0tsn80ej6o3t4tfqj58kq69rgk%40group.calendar.google.com&ctz=America%2FNew_York" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">Chapter Calendar</a></li>
+                    <li><a href="https://docs.google.com/forms/d/1D-qH8SHIV2e0ayf6f84e77lyVMVYE-53EFuuZLftgsE/viewform?edit_requested=true" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">Service Hours Log</a></li>
+                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSd_zUhesyRJjb_KzRWl_Fjj3DujE7vzuIp35--boEEv-9R7kQ/viewform" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">Sunshine Inbox</a></li>
+                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSd287wKP4vz-cNOe9l5v6KEn7-YwswPdKGqkRdgFvL6E6ULzw/viewform" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">Darkness Inbox</a></li>
+                </ul>
+            </div>
+
+            <div class="bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-purple-700">
+                <h3 class="text-2xl font-bold mb-4 text-purple-400 border-b-2 border-purple-600 pb-3 font-['Montserrat']">Latest Announcements</h3>
+                <p class="mb-3 italic text-gray-300 leading-relaxed">
+                    <strong class="font-semibold text-red-200">June 15, 2024:</strong> Brotherhood Retreat sign-ups close this Friday! Don't miss out.
+                </p>
+                <p class="italic text-gray-300 leading-relaxed">
+                    <strong class="font-semibold text-red-200">June 10, 2024:</strong> New study hours policy has been implemented. See full details <a href="#" class="text-blue-400 hover:text-blue-300 font-medium">here</a>.
+                </p>
+            </div>
+
+            <div class="bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-purple-700">
+                <h3 class="text-2xl font-bold mb-4 text-purple-400 border-b-2 border-purple-600 pb-3 font-['Montserrat']">Chapter Resources</h3>
+                <ul class="list-disc pl-5 space-y-3 text-gray-200">
+                    <li><a href="/files/resources/Chapter_Bylaws_2024.pdf" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">Chapter Bylaws (PDF)</a></li>
+                    <li><a href="/files/resources/New_Member_Handbook.pdf" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">New Member Handbook (PDF)</a></li>
+                    <li><a href="/files/resources/Officer_Contact_List.pdf" target="_blank" class="text-blue-400 hover:text-blue-300 font-medium">Officer Contact List (PDF)</a></li>
+                </ul>
+            </div>
+
+            <div class="bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-purple-700 md:col-span-2 lg:col-span-2 xl:col-span-2">
+                <h3 class="text-2xl font-bold mb-4 text-purple-400 border-b-2 border-purple-600 pb-3 font-['Montserrat']">Service Hour Leaderboard</h3>
+
+                <div class="overflow-x-auto border border-purple-700 rounded-md">
+                    <table id="leaderboard-table" class="min-w-full divide-y divide-gray-600">
+                        <thead class="bg-gray-800">
+                            <tr>
+                                <th class="py-3 px-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Rank</th>
+                                <th class="py-3 px-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Brother Name</th>
+                                <th class="py-3 px-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Hours</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-700 divide-y divide-gray-600">
+                            {% if leaderboard %}
+                                {% for entry in leaderboard %}
+                                    <tr class="{% if loop.index == 1 %}bg-purple-800 text-white{% elif loop.index == 2 %}bg-purple-700 text-gray-100{% elif loop.index == 3 %}bg-purple-600 text-gray-200{% else %}text-gray-200{% endif %}">
+                                        <td class="py-3 px-4 whitespace-nowrap font-bold text-lg">#{{ loop.index }}</td>
+                                        <td class="py-3 px-4 whitespace-nowrap">{{ entry.name }}</td>
+                                        <td class="py-3 px-4 whitespace-nowrap">{{ entry.hours | round(1) }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="3" class="py-4 text-center text-gray-400">No leaderboard data available. Ensure 'data/service_hours.csv' exists and is correctly formatted.</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            {# ADMIN SPECIFIC SECTIONS START HERE #}
+
             <div class="bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-purple-700">
                 <h3 class="text-2xl font-bold mb-4 text-purple-400 border-b-2 border-purple-600 pb-3 font-['Montserrat']">Upload Service Hours CSV</h3>
                 <p class="text-gray-300 mb-4">Upload a new CSV file to update the service hours leaderboard. The CSV should contain columns named 'name' and 'hours' OR 'brother' and 'service_hours'.</p>
@@ -110,7 +184,10 @@
                     <li><a href="#" class="text-blue-400 hover:text-blue-300 font-medium">View Logs (Coming Soon)</a></li>
                 </ul>
             </div>
-        </div>
-    </div>
+
+        </div> {# End of grid #}
+    </div> {# End of container #}
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

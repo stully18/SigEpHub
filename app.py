@@ -20,7 +20,8 @@ SERVICE_HOURS_CSV_PATH = os.path.join(app.root_path, 'data', SERVICE_HOURS_CSV_F
 userDB = {
     "shane": "012420",
     "ronan": "1234",
-    "regularuser": "password"
+    "regularuser": "password",
+    "purpleviolet": "darkredrose"
 }
 
 leaderboard_data = []
